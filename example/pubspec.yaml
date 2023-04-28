@@ -24,7 +24,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
   progress_dialog: ^1.2.4
-  barcode_scan: ^3.0.1  
+  barcode_scan2: any
   permission_handler: ^5.0.1+1
   qr_flutter: ^3.2.0
 

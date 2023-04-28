@@ -101,8 +101,8 @@ class _CredentialDialogState extends State<CredentialDialog> {
                   )
                 : Text(''),
           ),
-          RaisedButton(
-            color: Colors.blue,
+          ElevatedButton(
+            // color: Colors.blue,
             onPressed: submitSchema,
             child: Text(
               'Submit',

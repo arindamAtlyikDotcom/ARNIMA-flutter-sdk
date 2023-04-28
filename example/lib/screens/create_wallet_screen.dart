@@ -111,8 +111,8 @@ class _CreateWalletScreenState extends State<CreateWalletScreen> {
                 vertical: 10,
               ),
               height: 50,
-              child: RaisedButton(
-                color: Colors.blue,
+              child: ElevatedButton(
+                // color: Colors.blue,
                 onPressed: () async {
                   if (walletNameController.text != '' &&
                       walletKeyController.text != '') {

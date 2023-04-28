@@ -26,7 +26,7 @@ class AriesFlutterMobileAgent {
   static Future<void> init() async {
     try {
       final appDocumentDirectory =
-          await path_provider.getApplicationDocumentsDirectory();
+      await path_provider.getApplicationDocumentsDirectory();
       Hive.init(appDocumentDirectory.path);
       Hive.registerAdapter(WalletDataAdapter());
       Hive.registerAdapter(ConnectionDataAdapter());
@@ -41,11 +41,9 @@ class AriesFlutterMobileAgent {
     }
   }
 
-  static Future<List<dynamic>> createWallet(
-    Object configJson,
-    Object credentialsJson,
-    String label,
-  ) async {
+  static Future<List<dynamic>> createWallet(Object configJson,
+      Object credentialsJson,
+      String label,) async {
     try {
       List<dynamic> response = await WalletService.createWallet(
         jsonEncode(configJson),
@@ -67,15 +65,13 @@ class AriesFlutterMobileAgent {
     }
   }
 
-  static Future<bool> connectWithMediator(
-    String url,
-    String apiBody,
-    String poolConfig,
-  ) async {
+  static Future<bool> connectWithMediator(String url,
+      String apiBody,
+      String poolConfig,) async {
     try {
       WalletData user = await DBServices.getWalletData();
       var agentRegResponse =
-          await ConnectWithMediatorService.connectWithMediator(
+      await ConnectWithMediatorService.connectWithMediator(
         url,
         apiBody,
         user.walletConfig,
@@ -102,7 +98,7 @@ class AriesFlutterMobileAgent {
   static Future<MessageData> getActionMessagesById(String threadId) async {
     try {
       MessageData messageData =
-          await DBServices.getActionMessagesById(threadId);
+      await DBServices.getActionMessagesById(threadId);
       return messageData;
     } catch (exception) {
       print("Exception getAllActionMessagesById $exception");
@@ -125,10 +121,8 @@ class AriesFlutterMobileAgent {
     }
   }
 
-  static Future acceptInvitation(
-    Object didJson,
-    String message,
-  ) async {
+  static Future acceptInvitation(Object didJson,
+      String message,) async {
     try {
       WalletData user = await DBServices.getWalletData();
       Object invitation = decodeInvitationFromUrl(message);
@@ -148,7 +142,7 @@ class AriesFlutterMobileAgent {
   static Future<List<ConnectionData>> getAllConnections() async {
     try {
       List<ConnectionData> connectionList =
-          await DBServices.getAllConnections();
+      await DBServices.getAllConnections();
       return connectionList;
     } catch (exception) {
       print("Error getAllConnections $exception");
@@ -156,17 +150,15 @@ class AriesFlutterMobileAgent {
     }
   }
 
-  static Future sendCredentialProposal(
-    connectionId,
-    credentialProposal,
-    schemaId,
-    credDefId,
-    issuerDid,
-  ) async {
+  static Future sendCredentialProposal(connectionId,
+      credentialProposal,
+      schemaId,
+      credDefId,
+      issuerDid,) async {
     try {
       WalletData sdkDB = await DBServices.getWalletData();
       var sendCredentialProposal =
-          await CredentialService.sendCredentialProposal(
+      await CredentialService.sendCredentialProposal(
         sdkDB.walletConfig,
         sdkDB.walletCredentials,
         connectionId,
@@ -185,7 +177,7 @@ class AriesFlutterMobileAgent {
   static Future<List<CredentialData>> getAllCredentials() async {
     try {
       List<CredentialData> credentialList =
-          await DBServices.getAllCredentials();
+      await DBServices.getAllCredentials();
       return credentialList;
     } catch (exception) {
       print("Error getAllCredentials $exception");
@@ -199,7 +191,7 @@ class AriesFlutterMobileAgent {
         jsonDecode(message),
       );
       bool response =
-          await CredentialService.createCredentialRequest(inboundMessage);
+      await CredentialService.createCredentialRequest(inboundMessage);
       if (response) {
         await DBServices.removeMessage(messageId);
       }
@@ -232,7 +224,7 @@ class AriesFlutterMobileAgent {
       String recipientVerkey) async {
     try {
       List<PresentationData> presentationList =
-          await DBServices.getPresentationByConnectionId(recipientVerkey);
+      await DBServices.getPresentationByConnectionId(recipientVerkey);
       return presentationList;
     } catch (exception) {
       print("Error getPresentationByConnectionId $exception");
@@ -246,7 +238,7 @@ class AriesFlutterMobileAgent {
         jsonDecode(message),
       );
       bool response =
-          await PresentationService.createPresentProofRequest(inboundMessage);
+      await PresentationService.createPresentProofRequest(inboundMessage);
       if (response) {
         await DBServices.removeMessage(messageId);
       }
@@ -257,7 +249,8 @@ class AriesFlutterMobileAgent {
   }
 
   static Future socketInit() async {
-    String url = await DBServices.getServiceEndpoint();
+    // String url = await DBServices.getServiceEndpoint();
+    String url = "https://40ea-117-199-72-184.in.ngrok.io";
     IO.Socket socket = IO.io(url, <String, dynamic>{
       'transports': ['websocket'],
       'reconnection': true,
@@ -282,11 +275,9 @@ class AriesFlutterMobileAgent {
     socket.emit('message', user.verkey);
   }
 
-  static Future emitMessageIdForAcknowledgement(
-    int msgLength,
-    String inboxId,
-    socket,
-  ) async {
+  static Future emitMessageIdForAcknowledgement(int msgLength,
+      String inboxId,
+      socket,) async {
     if (msgLength > 0) {
       var user = await DBServices.getWalletData();
       inboxId = inboxId.substring(0, inboxId.length - 1);
@@ -302,13 +293,13 @@ class AriesFlutterMobileAgent {
   static Future eventListener() async {
     Stream stream = controller.stream;
     stream.listen(
-      (event) async {
+          (event) async {
         try {
           if (event != '' && event == 'preparedResponseforInboundMessage') {
             WalletData user = await DBServices.getWalletData();
 
             List<MessageData> dbMessages =
-                await DBServices.getAllUnprocessedMessages();
+            await DBServices.getAllUnprocessedMessages();
 
             for (int i = 0; i < dbMessages.length; i++) {
               if (dbMessages[i].auto) {
@@ -324,10 +315,10 @@ class AriesFlutterMobileAgent {
                 );
 
                 Map<String, dynamic> message =
-                    jsonDecode(unPackMessageResponse);
+                jsonDecode(unPackMessageResponse);
 
                 Map<String, dynamic> messageValues =
-                    jsonDecode(message['message']);
+                jsonDecode(message['message']);
                 switch (messageValues['@type']) {
                   case MessageType.ConnectionResponse:
                     connectionRsponseType(user, message, dbMessages, i);
@@ -372,20 +363,21 @@ class AriesFlutterMobileAgent {
       if (data.length > 0) {
         data
             .map(
-              (message) => {
-                inboxId = inboxId + message['id'].toString() + ",",
-                DBServices.saveMessages(
-                  MessageData(
-                    auto: true,
-                    isProcessed: false,
-                    messageId: message['id'].toString() + '',
-                    messages: message.runtimeType is String
-                        ? message['message']
-                        : jsonEncode(message['message']),
-                  ),
-                ),
-              },
-            )
+              (message) =>
+          {
+            inboxId = inboxId + message['id'].toString() + ",",
+            DBServices.saveMessages(
+              MessageData(
+                auto: true,
+                isProcessed: false,
+                messageId: message['id'].toString() + '',
+                messages: message.runtimeType is String
+                    ? message['message']
+                    : jsonEncode(message['message']),
+              ),
+            ),
+          },
+        )
             .toList();
         var messages = await DBServices.getMessages();
         messages.map((e) => print('objectscheck ${e.messageId}')).toList();

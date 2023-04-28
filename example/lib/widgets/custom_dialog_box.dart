@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:AriesFlutterMobileAgent/AriesAgent.dart';
 import 'package:AriesFlutterMobileAgent_example/helpers/constants.dart';
 import 'package:flutter/material.dart';
@@ -145,8 +144,8 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                           ? Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                FlatButton(
-                                  color: Colors.grey,
+                                ElevatedButton(
+                                  // color: Colors.grey,
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },
@@ -155,8 +154,8 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                                     style: TextStyle(fontSize: 16),
                                   ),
                                 ),
-                                FlatButton(
-                                  color: Colors.blue,
+                                ElevatedButton(
+                                  // color: Colors.blue,
                                   onPressed: () async {
                                     Navigator.of(context).pop();
                                     await acceptCredential(widget.message);
@@ -178,8 +177,8 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                   : Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        FlatButton(
-                          color: Colors.grey,
+                        ElevatedButton(
+                          // color: Colors.grey,
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
@@ -188,8 +187,8 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                             style: TextStyle(fontSize: 16),
                           ),
                         ),
-                        FlatButton(
-                          color: Colors.blue,
+                        ElevatedButton(
+                          // color: Colors.blue,
                           onPressed: () async {
                             Navigator.of(context).pop();
                             await sendProof(widget.message);

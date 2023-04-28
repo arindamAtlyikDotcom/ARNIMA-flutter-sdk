@@ -72,8 +72,8 @@ class _ConnectMediatorScreenState extends State<ConnectMediatorScreen> {
                 vertical: 10,
               ),
               height: 40,
-              child: RaisedButton(
-                color: Colors.blue,
+              child: ElevatedButton(
+                // color: Colors.blue,
                 onPressed: () async {
                   await connectWithMediator();
                 },

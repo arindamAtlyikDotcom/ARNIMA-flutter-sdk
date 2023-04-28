@@ -6,7 +6,7 @@ import 'package:AriesFlutterMobileAgent_example/helpers/helpers.dart';
 import 'package:AriesFlutterMobileAgent_example/screens/connection_detail_screen.dart';
 import 'package:AriesFlutterMobileAgent_example/screens/qrcode_screen.dart';
 import 'package:AriesFlutterMobileAgent_example/widgets/custom_dialog_box.dart';
-import 'package:barcode_scan/barcode_scan.dart';
+import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flutter/material.dart';
 
 import 'package:AriesFlutterMobileAgent/AriesAgent.dart';
@@ -64,26 +64,26 @@ class _ConnectionScreenState extends State<ConnectionScreen>
   }
 
   showAlertDialog(invitation) {
-    Widget confirm = FlatButton(
+    Widget confirm = ElevatedButton(
       child: Text("CONFIRM"),
       onPressed: () {
         Navigator.pop(context);
         progressIndicator.show();
         acceptInvitation(invitation);
       },
-      color: Colors.blue,
-      shape: new RoundedRectangleBorder(
-        borderRadius: new BorderRadius.circular(30.0),
-      ),
-      minWidth: MediaQuery.of(context).size.width - 30,
+      // color: Colors.blue,
+      // shape: new RoundedRectangleBorder(
+      //   borderRadius: new BorderRadius.circular(30.0),
+      // ),
+      // minWidth: MediaQuery.of(context).size.width - 30,
     );
 
-    Widget cancel = FlatButton(
+    Widget cancel = ElevatedButton(
       child: Text("CANCEL"),
       onPressed: Navigator.of(context, rootNavigator: true).pop,
-      textColor: Colors.blue,
-      color: Colors.white,
-      minWidth: MediaQuery.of(context).size.width - 30,
+      // textColor: Colors.blue,
+      // color: Colors.white,
+      // minWidth: MediaQuery.of(context).size.width - 30,
     );
 
     AlertDialog alert = AlertDialog(
@@ -247,14 +247,14 @@ class _ConnectionScreenState extends State<ConnectionScreen>
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  RaisedButton(
+                  ElevatedButton(
                     onPressed: createInvitation,
                     child: Text('create Invitation'),
                   ),
-                  RaisedButton(
+                  ElevatedButton(
                     onPressed: addNewConnection,
                     child: Text('Add new Connection'),
-                    color: Colors.blue[200],
+                    // color: Colors.blue[200],
                   ),
                   Expanded(
                     child: ListView.builder(

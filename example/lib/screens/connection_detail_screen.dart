@@ -38,7 +38,7 @@ class _ConnectionDetailScreenState extends State<ConnectionDetailScreen> {
                       child: Text('No credentials'),
                     );
                   }
-                  return FlatButton(
+                  return ElevatedButton(
                     onPressed: () => showDialog(
                       context: context,
                       builder: (BuildContext context) {
@@ -48,12 +48,12 @@ class _ConnectionDetailScreenState extends State<ConnectionDetailScreen> {
                         );
                       },
                     ),
-                    height: 30,
+                    // height: 30,
                     child: Text(
                       '$credName',
                       style: TextStyle(color: Colors.white),
                     ),
-                    color: Colors.blue,
+                    // color: Colors.blue,
                   );
                 },
               ),
